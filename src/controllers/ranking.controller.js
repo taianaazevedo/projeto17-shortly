@@ -1,5 +1,5 @@
 import { db } from "../database/database.connection";
 
-export default function getRanking(req, res){
+export async function getRanking(req, res){
     
 }

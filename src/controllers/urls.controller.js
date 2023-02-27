@@ -1,17 +1,17 @@
 import { db } from "../database/database.connection";
 
-export default function shortUrl(req, res){
+export async function shortUrl(req, res){
 
 }
 
-export default function getUrlById(req, res){
+export async function getUrlById(req, res){
 
 }
 
-export default function getOpenUrl(req, res){
+export async function getOpenUrl(req, res){
 
 }
 
-export default function deleteUrlById(req, res){
+export async function deleteUrlById(req, res){
     
 }

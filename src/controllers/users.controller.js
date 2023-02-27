@@ -1,5 +1,5 @@
 import { db } from "../database/database.connection";
 
-export default function getUsers(req, res){
+export async function getUsers(req, res){
     
 }
