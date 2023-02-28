@@ -33,7 +33,7 @@ export async function signIn(req, res) {
         VALUES ($1, $2)`, [userExist.rows[0].id, token])
         
     }
-    res.status(200).send(token)
+    res.status(200).send({token})
 
   } catch (error) {
     res.status(500).send(error.message);
