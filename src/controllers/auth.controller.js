@@ -4,7 +4,7 @@ import { v4 as uuidV4 } from "uuid";
 
 export async function signIn(req, res) {
   const { email, password } = req.body;
-  const newToken = uuidV4()
+  const token = uuidV4()
 
   try {
     const userExist = await db.query(
@@ -27,13 +27,13 @@ export async function signIn(req, res) {
         await db.query(`
         UPDATE sessions 
         SET user_token = $1
-        WHERE user_id = $2`, [newToken, userExist.rows[0].id])
+        WHERE user_id = $2`, [token, userExist.rows[0].id])
     } else {
         await db.query(`INSERT INTO sessions (user_id, user_token) 
-        VALUES ($1, $2)`, [userExist.rows[0].id, newToken])
+        VALUES ($1, $2)`, [userExist.rows[0].id, token])
         
     }
-    res.status(200).send({newToken})
+    res.status(200).send(token)
 
   } catch (error) {
     res.status(500).send(error.message);
