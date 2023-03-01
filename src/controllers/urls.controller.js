@@ -54,8 +54,24 @@ export async function getUrlById(req, res){
 }
 
 export async function getOpenUrl(req, res){
+    const { shortUrl } = req.params
+
     try {
-        
+        const getUrl = await db.query(`
+        SELECT * 
+        FROM url
+        WHERE short_url = $1
+        `, [shortUrl])
+
+        if(getUrl.rowCount === 0) return res.status(404).send("Essa URL não existe")
+
+       await db.query(`
+            UPDATE url
+            SET visit_count = visit_count +1
+            WHERE short_url = $1
+        `, [shortUrl])
+
+        return res.redirect(getUrl.rows[0].url)
     } catch (error) {
         return res.status(500).send(error.message);
     }
