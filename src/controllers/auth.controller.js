@@ -47,14 +47,12 @@ export async function signUp(req, res) {
 
   try {
     const userExists = await db.query(
-      `
-        SELECT * FROM users 
+      `SELECT * FROM users 
         WHERE email = $1`,
       [email]
     );
 
-    if (userExists.rowCount > 0)
-      return res.status(409).send("Esse email já está cadastrado");
+    if (userExists.rowCount > 0) return res.status(409).send("Esse email já está cadastrado");
 
     await db.query(
       `INSERT INTO users (name, email, password) 
