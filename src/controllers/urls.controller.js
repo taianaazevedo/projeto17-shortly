@@ -17,6 +17,8 @@ export async function createShortUrl(req, res){
         WHERE user_token = $1
         `, [token])
 
+        if(findUser.rowCount === 0) return res.status(401).send("Você não está logado")
+
         await db.query(`
         INSERT INTO url (user_id, url, short_url) 
         VALUES ($1, $2, $3)
