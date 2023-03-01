@@ -37,6 +37,20 @@ export async function createShortUrl(req, res){
 }
 
 export async function getUrlById(req, res){
+    const { id } = req.params
+    try {
+        const getUrl = await db.query(`
+            SELECT * FROM url WHERE id = $1
+        `, [id])
+
+        if(getUrl.rowCount === 0) return res.status(404).send("Essa URL não existe")
+
+
+        return res.status(200).send({id: id, shortUrl: getUrl.rows[0].short_url, url: getUrl.rows[0].url })
+
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
 
 }
 

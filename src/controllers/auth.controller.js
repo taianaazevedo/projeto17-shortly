@@ -33,10 +33,10 @@ export async function signIn(req, res) {
         VALUES ($1, $2)`, [userExist.rows[0].id, token])
         
     }
-    res.status(200).send({token})
+   return res.status(200).send({token})
 
   } catch (error) {
-    res.status(500).send(error.message);
+   return res.status(500).send(error.message);
   }
 }
 
@@ -60,8 +60,8 @@ export async function signUp(req, res) {
       [name, email, hashPassword]
     );
 
-    res.status(201).send("Cliente cadastrado com sucesso!");
+    return res.status(201).send("Cliente cadastrado com sucesso!");
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 }
