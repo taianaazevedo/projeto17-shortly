@@ -32,17 +32,21 @@ export async function getUsers(req, res){
         WHERE user_id = $1
         `, [id])
 
-        const listUrl = await db.query(`
-        SELECT id, url, short_url, visit_count
-        FROM url
-        WHERE user_id = $1
-        `, [id])
+
+        const mapList = allUrls.rows.map((url) => {
+            return {
+                id: url.id,
+                shortUrl: url.short_url,
+                url: url.url,
+                visitCount: url.visit_count
+            }
+        })
 
         return res.status(200).send({
             id: allUrls.rows[0].user_id,
             name: urlOwner.rows[0].name,
             visitCount: sumVisit.rows[0].total,
-            shortenedUrls: listUrl.rows                      
+            shortenedUrls: mapList                            
         })
         
         
