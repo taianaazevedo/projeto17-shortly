@@ -46,7 +46,7 @@ export async function getUsers(req, res){
         // })
 
         return res.status(200).send({
-            id: allUrls.rows[0].user_id,
+            id: urlOwner.rows[0].id,
             name: urlOwner.rows[0].name,
             visitCount: sumVisit.rows[0].total,
             shortenedUrls: allUrls.rows                            
