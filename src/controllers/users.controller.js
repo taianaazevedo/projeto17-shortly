@@ -22,8 +22,6 @@ export async function getUsers(req, res){
         WHERE user_id = $1
         `, [id])
 
-        console.log(allUrls.rows)
-
         const urlOwner = await db.query(`
         SELECT * FROM users 
         WHERE id = $1
@@ -35,15 +33,6 @@ export async function getUsers(req, res){
         WHERE user_id = $1
         `, [id])
 
-
-        // const mapList = allUrls.rows.map((url) => {
-        //     return {
-        //         id: url.id,
-        //         shortUrl: url.short_url,
-        //         url: url.url,
-        //         visitCount: url.visit_count
-        //     }
-        // })
 
         return res.status(200).send({
             id: urlOwner.rows[0].id,
