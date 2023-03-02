@@ -17,9 +17,12 @@ export async function getUsers(req, res){
         const id = findUser.rows[0].user_id
 
         const allUrls = await db.query(`
-        SELECT * FROM url 
+        SELECT url.url, url.id, url."visitCount", url."shortUrl" 
+        FROM url 
         WHERE user_id = $1
         `, [id])
+
+        console.log(allUrls.rows)
 
         const urlOwner = await db.query(`
         SELECT * FROM users 
@@ -27,26 +30,26 @@ export async function getUsers(req, res){
         `, [id])
 
         const sumVisit = await db.query(`
-        SELECT SUM(visit_count) AS total 
+        SELECT SUM("visitCount") AS total 
         FROM url
         WHERE user_id = $1
         `, [id])
 
 
-        const mapList = allUrls.rows.map((url) => {
-            return {
-                id: url.id,
-                shortUrl: url.short_url,
-                url: url.url,
-                visitCount: url.visit_count
-            }
-        })
+        // const mapList = allUrls.rows.map((url) => {
+        //     return {
+        //         id: url.id,
+        //         shortUrl: url.short_url,
+        //         url: url.url,
+        //         visitCount: url.visit_count
+        //     }
+        // })
 
         return res.status(200).send({
             id: allUrls.rows[0].user_id,
             name: urlOwner.rows[0].name,
             visitCount: sumVisit.rows[0].total,
-            shortenedUrls: mapList                            
+            shortenedUrls: allUrls.rows                            
         })
         
         

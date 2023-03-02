@@ -60,8 +60,8 @@ CREATE TABLE public.url (
     id integer NOT NULL,
     user_id integer NOT NULL,
     url text NOT NULL,
-    short_url character varying(225) NOT NULL,
-    visit_count integer DEFAULT 0 NOT NULL,
+    "shortUrl" character varying(225) NOT NULL,
+    "visitCount" integer DEFAULT 0 NOT NULL,
     "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -144,42 +144,54 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.sessions VALUES (7, 1, '82d3e50c-1eda-40d5-998d-a984ac6213b2', '2023-02-28 13:35:24.143589');
+INSERT INTO public.sessions VALUES (1, 2, '86df8a3b-c691-4422-9e00-d9d86739e4b1', '2023-03-01 23:54:09.514512');
+INSERT INTO public.sessions VALUES (2, 1, 'bfa7ae74-407e-44c5-87fe-e87f17f290b5', '2023-03-01 23:55:20.512511');
+INSERT INTO public.sessions VALUES (3, 3, '15fcf308-7d9d-4174-93c9-dfaabd1f4f35', '2023-03-01 23:57:10.43072');
 
 
 --
 -- Data for Name: url; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.url VALUES (2, 2, 'https://www.globo.com', 'c9CrbKj', 4, '2023-03-01 23:54:42.521926');
+INSERT INTO public.url VALUES (3, 2, 'https://www.youtube.com', 'RS9qDmB', 2, '2023-03-01 23:55:02.949278');
+INSERT INTO public.url VALUES (4, 1, 'https://www.twitter.com', '52f8_qR', 6, '2023-03-01 23:55:50.325753');
+INSERT INTO public.url VALUES (5, 1, 'https://www.instagram.com', '70-v1x3', 11, '2023-03-01 23:55:59.405256');
+INSERT INTO public.url VALUES (6, 1, 'https://www.instagram.com/theoffice/', 'RFe4JLG', 3, '2023-03-01 23:56:53.230331');
+INSERT INTO public.url VALUES (7, 3, 'https://www.instagram.com/p/CopoO6AOFUQ/', 'odkrjf2', 17, '2023-03-01 23:57:43.729605');
+INSERT INTO public.url VALUES (8, 3, 'https://www.instagram.com/p/Cl9st9nuHRY/', '-mKJ3B_', 1, '2023-03-01 23:58:18.294024');
+INSERT INTO public.url VALUES (9, 3, 'https://www.instagram.com/p/Ch5ClHlBEgg/', '1NTSydR', 5, '2023-03-01 23:58:58.297538');
+INSERT INTO public.url VALUES (1, 2, 'https://www.github.com', 'nH9ET7X', 4, '2023-03-01 23:54:30.478142');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'Taiana Azevedo', 'taiana@taiana.com', '$2b$10$9Q5q5FLuchOElEsJmhwx5Oq6f212DsYNLaAC51IokeOD3pbOs/gtm', '2023-02-27 16:46:28.033134');
-INSERT INTO public.users VALUES (2, 'Rachel Green', 'rachel@email.com', '$2b$10$7DtGGPMlM/S7aeRZ.n.eBOdHKMJ2Ld8Fq0koZmN8qgX.mTt6Td55W', '2023-02-28 12:58:02.137265');
+INSERT INTO public.users VALUES (1, 'Dwight Schrute', 'dwight@email.com', '$2b$10$XvvR8.AiO12G6xqwIBOkzuij.pt1yWjHKdiFBqQiq4FESL8BFwi8C', '2023-03-01 23:51:14.648628');
+INSERT INTO public.users VALUES (2, 'Jim Halpert', 'jim@email.com', '$2b$10$8FnE4iawtraCGVKuN1eNJezBr.FhPMBwNZAK4/OfPqDRZUzGFBVny', '2023-03-01 23:51:53.714852');
+INSERT INTO public.users VALUES (3, 'Michael Scott', 'michael@email.com', '$2b$10$eVLYOivG6pjyECtz7b.VceJpH4o831N5m4VpXQ1OkBoIkuCrAyPMa', '2023-03-01 23:52:25.460921');
 
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 7, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 3, true);
 
 
 --
 -- Name: url_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.url_id_seq', 1, false);
+SELECT pg_catalog.setval('public.url_id_seq', 9, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_id_seq', 3, true);
 
 
 --

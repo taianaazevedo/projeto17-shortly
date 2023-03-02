@@ -20,7 +20,7 @@ export async function createShortUrl(req, res){
         if(findUser.rowCount === 0) return res.status(401).send("Você não está logado")
 
         await db.query(`
-        INSERT INTO url (user_id, url, short_url) 
+        INSERT INTO url (user_id, url, "shortUrl") 
         VALUES ($1, $2, $3)
         `, [findUser.rows[0].user_id, url, shortUrl])
 
@@ -29,7 +29,7 @@ export async function createShortUrl(req, res){
         WHERE url = $1
         `, [url])
 
-       return res.status(201).send({id: idUrl.rows[0].id, shortUrl: idUrl.rows[0].short_url})
+       return res.status(201).send({id: idUrl.rows[0].id, shortUrl: idUrl.rows[0].shortUrl})
         
     } catch (error) {
         return res.status(500).send(error.message);
@@ -45,7 +45,7 @@ export async function getUrlById(req, res){
 
         if(getUrl.rowCount === 0) return res.status(404).send("Essa URL não existe")
 
-        return res.status(200).send({id: id, shortUrl: getUrl.rows[0].short_url, url: getUrl.rows[0].url })
+        return res.status(200).send({id: id, shortUrl: getUrl.rows[0].shortUrl, url: getUrl.rows[0].url })
 
     } catch (error) {
         return res.status(500).send(error.message);
@@ -60,15 +60,15 @@ export async function getOpenUrl(req, res){
         const getUrl = await db.query(`
         SELECT * 
         FROM url
-        WHERE short_url = $1
+        WHERE "shortUrl" = $1
         `, [shortUrl])
 
         if(getUrl.rowCount === 0) return res.status(404).send("Essa URL não existe")
 
        await db.query(`
             UPDATE url
-            SET visit_count = visit_count +1
-            WHERE short_url = $1
+            SET "visitCount" = "visitCount" +1
+            WHERE "shortUrl" = $1
         `, [shortUrl])
 
         return res.redirect(getUrl.rows[0].url)
